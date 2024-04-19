@@ -9,7 +9,7 @@ export const connect = async ()=>{
     console.log(err);
    });
 }
-// *khW-qEEPp6E9-E pass
+
 
 
 export default connect
