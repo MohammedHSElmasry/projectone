@@ -19,7 +19,7 @@ const bootstrap = (app, express) => {
     app.use(asyncHandler)
     app.use(cors({
         origin: 'http://127.0.0.1:5500',
-        allowedHeaders: ['Content-Type'], // قائمة الرؤوس المسموح بها
+        allowedHeaders: ['Content-Type:application/json']
       }));
       
 
