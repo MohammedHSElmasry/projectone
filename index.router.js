@@ -19,7 +19,10 @@ const bootstrap = (app, express) => {
     app.use(asyncHandler)
     app.use(cors({
         origin: 'http://127.0.0.1:5500',
-    }));
+        allowedHeaders: ['Content-Type'], // قائمة الرؤوس المسموح بها
+      }));
+      
+
     app.use('*', (req, res, next) => {
         return res.status(404).json({ message: 'Invalid routing' });
     });
