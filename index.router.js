@@ -9,7 +9,6 @@ import cors from 'cors'
 
 
 const bootstrap = (app, express) => {
-    app.use(express.json())
     app.use('/user', user)
     app.use('/auth', auth)
     app.use('/city', city)
@@ -17,10 +16,9 @@ const bootstrap = (app, express) => {
     app.use('/trip', trip)
     app.use(handelerror)
     app.use(asyncHandler)
-    app.use(cors({
-        origin: '*',
-        allowedHeaders: ['Content-Type:application/json']
-      }));
+    app.use(cors())
+    app.use(express.json())
+    app.use(express.urlencoded({extends:true}))
       
 
     app.use('*', (req, res, next) => {
