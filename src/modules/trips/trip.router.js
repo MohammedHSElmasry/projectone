@@ -3,7 +3,7 @@ import * as tripcontrooler from './controller/trip.js'
 const router = Router()
 
 router.get('/',tripcontrooler.hotels)
-router.post('/create',tripcontrooler.createHotel)
+router.post('/create',tripcontrooler.createtrip)
 router.put('/update/:id',tripcontrooler.updatetrip)
-router.delete('/delete/:id',tripcontrooler.deleteHotel)
+router.delete('/delete/:id',tripcontrooler.deletedtrip)
 export default router

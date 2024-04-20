@@ -36,6 +36,9 @@ export const updateHotel = asyncHandler(async (req, res, next) => {
   const { name, cityname, singleRoomprice, doubleRoomprice } = req.body;
   const hotel = await hotelmodel.findById(id);
   const city = await citymodel.findOne({ cityname })
+  if (!city) {
+    return next(new Error("City not found", { cause: 404 }));
+  }
   if (!hotel) {
     return next(new Error("Hotel not found", { cause: 404 }));
   }

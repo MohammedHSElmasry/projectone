@@ -1,13 +1,13 @@
 import { citymodel } from "../../../../db/models/city.model.js";
 import { tripmodel } from "../../../../db/models/trip.model.js";
 import { asyncHandler } from "../../../utils/errorhandling.js";
-export const hotels = asyncHandler(async (req, res, next) => {
+export const trips = asyncHandler(async (req, res, next) => {
   const trips = await tripmodel.find();
 
   return res.json({ message: "done", trips });
 });
 
-export const createHotel = asyncHandler(async (req, res, next) => {
+export const createtrip = asyncHandler(async (req, res, next) => {
   const { tripname, cityname, price, duration } = req.body;
   const city = await citymodel.findOne({ cityname });
   const tripcheck = await tripmodel.findOne({ tripname });
@@ -34,8 +34,12 @@ export const createHotel = asyncHandler(async (req, res, next) => {
 export const updatetrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { tripname, cityname, price, duration } = req.body;
-  const trip = await tripmodel.findById(id);
   const city = await citymodel.findOne({ cityname })
+  if (!city) {
+    return next(new Error("City not found", { cause: 404 }));
+  }
+  const trip = await tripmodel.findById(id);
+
   if (!trip) {
     return next(new Error("trip not found", { cause: 404 }));
   }
@@ -44,18 +48,18 @@ export const updatetrip = asyncHandler(async (req, res, next) => {
   trip.price = price
   trip.duration = duration
   await trip.save();
-  return res.json({ message: "Hotel updated successfully", trip });
+  return res.json({ message: "trip updated successfully", trip });
 }
 );
 
 
 
-export const deleteHotel = asyncHandler(async (req, res, next) => {
+export const deletedtrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const deletedtrip = await tripmodel.findByIdAndDelete(id);
   if (!deletedtrip) {
     return next(new Error("trip not found", { cause: 404 }));
   }
-  return res.json({ message: "Hotel deleted successfully", deletedtrip });
+  return res.json({ message: "trip deleted successfully", deletedtrip });
 }
 );
