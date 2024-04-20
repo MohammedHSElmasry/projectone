@@ -16,7 +16,7 @@ const bootstrap= (app,express)=>{
     app.use('/trip',trip)
     app.use(handelerror)
     app.use(asyncHandler)
-    app.use(cors)
+    app.use(cors())
     app.use('*', (req, res, next) => {
         return res.json({ message: 'Invalid routing' });
     });
