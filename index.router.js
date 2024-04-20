@@ -4,7 +4,8 @@ import { asyncHandler, handelerror } from "./src/utils/errorhandling.js"
 import city from './src/modules/city/city.router.js'
 import hotel from './src/modules/hotel/hotel.router.js'
 import trip from './src/modules/trips/trip.router.js'
-import cors from 'cors'
+import cors from 'cors' 
+
 
 
 const bootstrap= (app,express)=>{
@@ -16,10 +17,10 @@ const bootstrap= (app,express)=>{
     app.use('/trip',trip)
     app.use(handelerror)
     app.use(asyncHandler)
-    app.use(cors())
-    app.use('*', (req, res, next) => {
-        return res.json({ message: 'Invalid routing' });
-    });
+    app.use(cors({
+        origin: 'http://127.0.0.1:5500', 
+      }));
+
     
 }
 
