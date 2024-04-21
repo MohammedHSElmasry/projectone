@@ -19,7 +19,11 @@ const tripSchema = new Schema(
         duration: {
             type: String,
             default: '3days'
-        }
+        },
+        image: {
+            secure_url: { type: String, required: true },
+            public_id: { type: String, required: true }
+          },
     },
     {
         timestamps: true,

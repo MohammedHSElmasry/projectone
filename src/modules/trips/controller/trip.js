@@ -1,6 +1,7 @@
 import { citymodel } from "../../../../db/models/city.model.js";
 import { tripmodel } from "../../../../db/models/trip.model.js";
 import { asyncHandler } from "../../../utils/errorhandling.js";
+import cloudinary from "../../../utils/cloudinary.js";
 export const trips = asyncHandler(async (req, res, next) => {
   const trips = await tripmodel.find();
 
@@ -18,11 +19,19 @@ export const createtrip = asyncHandler(async (req, res, next) => {
     return res.status(404).json({ message: "City not found" });
   }
 
+  if (!req.file) { return next(new Error("image is required ", { cause: 400 })) }
+  const { secure_url, public_id } = await cloudinary.uploader.upload(
+    req.file.path,
+    {
+      folder: `project/trip`
+    }
+  )
   const trip = await tripmodel.create({
     tripname,
     city_id: city._id,
     price,
     duration,
+    image:{ secure_url, public_id }
   });
 
   return res.json({ message: " done", trip });

@@ -20,7 +20,10 @@ const hotelschema = new Schema(
       type: String,
       required: true,
     },
-    hotelimage: { secure_url: String, public_id: String },
+    image: {
+      secure_url: { type: String, required: true },
+      public_id: { type: String, required: true }
+    },
   },
   {
     timestamps: true,
