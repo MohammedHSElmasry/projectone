@@ -1,10 +1,11 @@
 import * as citycontroller from "./controller/city.js";
 import { validition } from "../../middleware/validation.js";
+import {fileUpload,fileValidation} from '../../utils/multer.js'
 import * as validators from "./valdition.js";
 import { Router } from "express";
 const router = Router();
 router.post(
-  "/create",
+  "/create",fileUpload(fileValidation.image).single('city'),
   validition(validators.create),
   citycontroller.createcity
 );
