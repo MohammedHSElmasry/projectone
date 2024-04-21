@@ -31,7 +31,7 @@ export const createtrip = asyncHandler(async (req, res, next) => {
     city_id: city._id,
     price,
     duration,
-    image:{ secure_url, public_id }
+    image: { secure_url, public_id }
   });
 
   return res.json({ message: " done", trip });
@@ -62,12 +62,11 @@ export const updatetrip = asyncHandler(async (req, res, next) => {
 );
 
 
-
 export const deletedtrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const deletedtrip = await tripmodel.findByIdAndDelete(id);
   if (!deletedtrip) {
-    return next(new Error("trip not found", { cause: 404 }));
+    return res.status(404).json({ message: "trip not found" });
   }
   return res.json({ message: "trip deleted successfully", deletedtrip });
 }
