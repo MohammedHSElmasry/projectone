@@ -1,7 +1,7 @@
 import { asyncHandler } from "../../../utils/errorhandling.js";
 import { citymodel } from "../../../../db/models/city.model.js";
 export const createcity = asyncHandler(async (req, res, next) => {
-  const { cityname } = req.body;
+  const {cityname } = req.body;
   const citycheck = await citymodel.findOne({ cityname });
   if (citycheck) {
     return next(new Error("city exist", { cause: 201 }));
