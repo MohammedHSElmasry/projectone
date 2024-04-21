@@ -11,13 +11,13 @@ import cors from 'cors'
 const bootstrap = (app, express) => {
     app.use(cors())
     app.use(express.json())
-    app.use(handelerror)
-    app.use(asyncHandler)
     app.use('/user', user)
     app.use('/auth', auth)
     app.use('/city', city)
     app.use('/hotel', hotel)
     app.use('/trip', trip)
+    app.use(handelerror)
+    app.use(asyncHandler)
     app.use('*', (req, res, next) => {
         return res.status(404).json({ message: 'Invalid routing' });
     });
