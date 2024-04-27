@@ -5,3 +5,9 @@ export const getuser = asyncHandler(async (req, res, next) => {
  const user = await userModel.findById(id)
   return res.json({ message: "done", user: user});
 });
+
+
+export const users = asyncHandler(async (req, res, next) => {
+  const users = await userModel.find()
+   return res.json({ message: "done", user: users});
+ });
