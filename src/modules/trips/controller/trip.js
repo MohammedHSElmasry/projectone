@@ -53,7 +53,7 @@ export const updatetrip = asyncHandler(async (req, res, next) => {
     return next(new Error("trip not found", { cause: 404 }));
   }
   trip.tripname = tripname
-  trip.cityname = city._id
+  trip.cityname = city.cityname
   trip.price = price
   trip.duration = duration
   await trip.save();

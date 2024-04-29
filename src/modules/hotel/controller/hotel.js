@@ -53,7 +53,7 @@ export const updateHotel = asyncHandler(async (req, res, next) => {
     return next(new Error("Hotel not found", { cause: 404 }));
   }
   hotel.name = name
-  hotel.cityname = city._id
+  hotel.cityname = city.cityname
   hotel.singleRoomprice = singleRoomprice
   hotel.doubleRoomprice = doubleRoomprice
   await hotel.save();
