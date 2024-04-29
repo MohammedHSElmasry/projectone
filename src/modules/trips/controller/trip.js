@@ -28,7 +28,7 @@ export const createtrip = asyncHandler(async (req, res, next) => {
   )
   const trip = await tripmodel.create({
     tripname,
-    city_id: city._id,
+    cityname: city.cityname,
     price,
     duration,
     image: { secure_url, public_id }

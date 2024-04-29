@@ -29,7 +29,7 @@ export const createHotel = asyncHandler(async (req, res, next) => {
 
   const hotel = await hotelmodel.create({
     name,
-    city_id: city._id,
+    cityname: city.cityname,
     singleRoomprice,
     doubleRoomprice,
     image: { secure_url, public_id }

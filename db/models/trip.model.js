@@ -1,5 +1,5 @@
 
-import { Schema, model ,Types } from "mongoose";
+import { Schema, model  } from "mongoose";
 
 const tripSchema = new Schema(
     {
@@ -8,8 +8,8 @@ const tripSchema = new Schema(
             required: true,
             unique: true,
         },
-        city_id: {
-            type: Types.ObjectId,
+        cityname: {
+            type: String,
             ref: "city",
             required: true,
         },

@@ -1,4 +1,4 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const hotelschema = new Schema(
   {
@@ -7,8 +7,8 @@ const hotelschema = new Schema(
       required: true,
       unique: true,
     },
-    city_id: {
-      type: Types.ObjectId,
+    cityname: {
+      type: String,
       ref: "city",
       required: true,
     },
