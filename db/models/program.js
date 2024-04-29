@@ -9,12 +9,12 @@ const programschema = new Schema({
     city_name: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     hotel_name: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     trips: [String]
 },
