@@ -72,3 +72,15 @@ export const deleteHotel = asyncHandler(async (req, res, next) => {
   return res.json({ message: "Hotel deleted successfully", deletedHotel });
 }
 );
+
+
+
+export const hotelbecity = asyncHandler(async (req, res, next) => {
+  const { cityid } = req.params;
+  const city = await citymodel.findById(cityid);
+  if (!city) {
+    return res.status(404).json({ message: "in-valid Id city  " });
+  }
+  const hotels = await hotelmodel.find({ cityname: city.cityname });
+  return res.json({ message: "done", hotels });
+});

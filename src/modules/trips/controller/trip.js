@@ -71,3 +71,14 @@ export const deletedtrip = asyncHandler(async (req, res, next) => {
   return res.json({ message: "trip deleted successfully", deletedtrip });
 }
 );
+
+
+export const tripbecity = asyncHandler(async (req, res, next) => {
+  const { cityid } = req.params;
+  const city = await citymodel.findById(cityid);
+  if (!city) {
+    return res.status(404).json({ message: "in-valid Id city  " });
+  }
+  const trips = await tripmodel.find({ cityname: city.cityname });
+  return res.json({ message: "done", trips });
+});
