@@ -4,33 +4,36 @@ import { programmodel } from "../../../../db/models/program.js";
 import { tripmodel } from "../../../../db/models/trip.model.js";
 import { asyncHandler } from "../../../utils/errorhandling.js";
 
-export const createprogram = asyncHandler(async (req, res, next) => {
+
+export const createProgram = asyncHandler(async (req, res, next) => {
   const { program_name, city_name, hotel_name, trips } = req.body;
 
   if (!program_name || !city_name || !hotel_name || !trips) {
     return res.status(400).json({ message: "Missing required fields" });
   }
 
-  
-  const city = await citymodel.findOne({ cityname: city_name });
-  if (!city) {
-    return res.status(404).json({ message: "City not found" });
-  }
 
-  const hotel = await hotelmodel.findOne({ name: hotel_name });
-  if (!hotel) {
-    return res.status(404).json({ message: "Hotel not found" });
-  }
+    const city = await citymodel.findOne({ cityname: city_name }); // تم تصحيح اسم الحقل
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
+    }
 
-  const program = await programmodel.create({
-    program_name,
-    city_name,
-    hotel_name,
-    trips,
-  });
+    const hotel = await hotelmodel.findOne({ name: hotel_name });
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
 
-  return res.json({ message: "Program created successfully", program });
+    const program = await programmodel.create({
+      program_name: program_name, // تم تصحيح اسم الحقل
+      city_name: city_name, // تم تصحيح اسم الحقل
+      hotel_name: hotel_name, // تم تصحيح اسم الحقل
+      trips,
+    });
+
+    return res.json({ message: "Program created successfully", program });
+
 });
+
 
 
 

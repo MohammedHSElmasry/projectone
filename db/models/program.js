@@ -3,24 +3,24 @@ import { Schema, model } from 'mongoose'
 const programschema = new Schema({
     program_name: {
         type: String,
-        required: true,
-        unique: true,
+        required: false,
+        unique: false,
     },
     city_name: {
         type: String,
-        required: true,
+        required: false,
         unique: false,
     },
     hotel_name: {
         type: String,
-        required: true,
+        required: false,
         unique: false,
     },
-    trips: [String]
+    trips: [String],
 },
     {
         timestamps: true
     })
 
 
-export const programmodel = model('proram', programschema)
+export const programmodel = model('program', programschema)
