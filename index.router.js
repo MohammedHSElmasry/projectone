@@ -5,7 +5,9 @@ import city from './src/modules/city/city.router.js'
 import hotel from './src/modules/hotel/hotel.router.js'
 import trip from './src/modules/trips/trip.router.js'
 import program from './src/modules/program/program.router.js'
+import boking from './src/modules/boking/boking.router.js'
 import cors from 'cors'
+
 
 
 
@@ -18,6 +20,7 @@ const bootstrap = (app, express) => {
     app.use('/hotel', hotel)
     app.use('/trip', trip)
     app.use('/program', program)
+    app.use('/boking',boking)
     app.use(handelerror)
     app.use(asyncHandler)
     app.use('*', (req, res, next) => {

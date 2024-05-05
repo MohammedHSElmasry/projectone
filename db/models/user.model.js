@@ -36,6 +36,8 @@ const userschema = new Schema(
   },
   
 );
+   
+
 
  export const userModel = model("user", userschema);
 
