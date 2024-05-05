@@ -7,41 +7,43 @@ import { programmodel } from "../../../../db/models/program.js";
 export const addBooking = asyncHandler(async (req, res, next) => {
   const { userid, id } = req.params;
   const user = await userModel.findById(userid);
-  const trip = await tripmodel.findById(id);
-  const hotel = await hotelmodel.findById(id);
-  const program = await programmodel.findById(id);
+  let tripBooked = null;
+  let hotelBooked = null;
+  let programBooked = null;
+
   if (!user) {
     return next(new Error("Invalid userid"));
   }
 
-  let tripBooked = false;
-  let hotelBooked = false;
-  let programBooked = false;
+  const trip = await tripmodel.findById(id);
+  const hotel = await hotelmodel.findById(id);
+  const program = await programmodel.findById(id);
+
   if (trip) {
-    tripBooked = true; // إذا كان هناك رحلة، ثم تفعيل الحجز إلى true
+    tripBooked = id;
   } else if (hotel) {
-    hotelBooked = true;
-  } else programBooked = true;
+    hotelBooked = id;
+  } else if (program) {
+    programBooked = id;
+  }
 
   const booking = await bokingmodel.create({
     fname: user.fname,
     lname: user.lname,
     username: user.username,
-    gmail: user.email,
+    email: user.email,
     userid,
     userApplied: {
       trip: tripBooked,
-      hotel:hotelBooked,
-      program:programBooked
+      hotel: hotelBooked,
+      program: programBooked,
     },
   });
 
   return res.json({ message: "Done", booking });
 });
 
-
-
-export const getbooking = asyncHandler(async(req,res,next)=>{
-    const book = await bokingmodel.find()
-    return res.json({message:'done',book})
-})
+export const getbooking = asyncHandler(async (req, res, next) => {
+  const book = await bokingmodel.find();
+  return res.json({ message: "done", book });
+});
