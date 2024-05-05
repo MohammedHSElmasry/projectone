@@ -20,11 +20,11 @@ export const addBooking = asyncHandler(async (req, res, next) => {
   const program = await programmodel.findById(id);
 
   if (trip) {
-    tripBooked = id;
+    tripBooked = trip.tripname;
   } else if (hotel) {
-    hotelBooked = id;
+    hotelBooked = hotel.name;
   } else if (program) {
-    programBooked = id;
+    programBooked = program_name;
   }
 
   const booking = await bokingmodel.create({
@@ -46,4 +46,22 @@ export const addBooking = asyncHandler(async (req, res, next) => {
 export const getbooking = asyncHandler(async (req, res, next) => {
   const book = await bokingmodel.find();
   return res.json({ message: "done", book });
+});
+
+export const deleteBooking = asyncHandler(async (req, res, next) => {
+  const { bokid } = req.params;
+
+  // التحقق من صحة البيانات المرسلة
+  if (!bokid) {
+    return res.status(400).json({ message: "Missing booking ID" });
+  }
+
+  // البحث عن الحجز وحذفه
+  const book = await bokingmodel.findOneAndDelete({ _id: bokid });
+
+  if (!book) {
+    return res.status(404).json({ message: "Booking not found" });
+  }
+
+  return res.json({ message: "Booking deleted successfully", book });
 });
