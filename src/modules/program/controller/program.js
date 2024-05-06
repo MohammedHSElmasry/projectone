@@ -1,7 +1,6 @@
 import { citymodel } from "../../../../db/models/city.model.js";
 import { hotelmodel } from "../../../../db/models/hotel.model.js";
 import { programmodel } from "../../../../db/models/program.js";
-import { tripmodel } from "../../../../db/models/trip.model.js";
 import { asyncHandler } from "../../../utils/errorhandling.js";
 
 
@@ -11,8 +10,6 @@ export const createProgram = asyncHandler(async (req, res, next) => {
   if (!program_name || !city_name || !hotel_name || !trips) {
     return res.status(400).json({ message: "Missing required fields" });
   }
-
-
     const city = await citymodel.findOne({ cityname: city_name }); // تم تصحيح اسم الحقل
     if (!city) {
       return res.status(404).json({ message: "City not found" });
