@@ -24,7 +24,7 @@ export const addBooking = asyncHandler(async (req, res, next) => {
   } else if (hotel) {
     hotelBooked = hotel.name;
   } else if (program) {
-    programBooked = program_name;
+    programBooked = program.program_name;
   }
 
   const booking = await bokingmodel.create({
