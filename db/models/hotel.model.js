@@ -5,7 +5,6 @@ const hotelschema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
     },
     cityname: {
       type: String,

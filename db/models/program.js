@@ -4,7 +4,6 @@ const programschema = new Schema({
     program_name: {
         type: String,
         required: false,
-        unique: false,
     },
     city_name: {
         type: String,
@@ -16,6 +15,10 @@ const programschema = new Schema({
         required: false,
         unique: false,
     },
+    hotelimage: {
+        secure_url: { type: String},
+        public_id: { type: String}
+      },
     trips: [String],
 },
     {

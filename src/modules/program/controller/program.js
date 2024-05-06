@@ -27,6 +27,10 @@ export const createProgram = asyncHandler(async (req, res, next) => {
       program_name: program_name, // تم تصحيح اسم الحقل
       city_name: city_name, // تم تصحيح اسم الحقل
       hotel_name: hotel_name, // تم تصحيح اسم الحقل
+      hotelimage: {
+        secure_url: hotel.image.secure_url,
+        public_id: hotel.image.public_id
+      },
       trips,
     });
 
