@@ -7,8 +7,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // تهيئة Cloudinary
 cloudinary.config({
   cloud_name: 'dl3fchoxe',
-  api_key: '832631762689321',
-  api_secret: 'NZh_mNzoXsG3ArCZkHxULkni89E',
+  api_key: '642148465832481',
+  api_secret: 'VW0ofLQmAxyIe_CzTsOMgwNcYMY',
   secure: true
 });
 
