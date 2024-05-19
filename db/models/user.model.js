@@ -24,11 +24,7 @@ const userschema = new Schema(
     password: {
       type: String,
       required: true,
-    },
-    confirmEmail:{
-      type:Boolean,
-      default:false
-    },
+    }
     
   },
   {
