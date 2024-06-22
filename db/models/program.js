@@ -20,6 +20,14 @@ const programschema = new Schema({
         public_id: { type: String}
       },
     trips: [String],
+    programStartDate: {
+        type: Date,
+        required: true,
+    },
+    programEndDate: {
+        type: Date,
+        required: true,
+    }
 },
     {
         timestamps: true

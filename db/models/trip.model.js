@@ -1,5 +1,4 @@
-
-import { Schema, model  } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const tripSchema = new Schema(
     {
@@ -13,7 +12,8 @@ const tripSchema = new Schema(
             required: true,
         },
         price: {
-            type: String, required: true
+            type: String,
+            required: true
         },
         duration: {
             type: String,
@@ -22,7 +22,11 @@ const tripSchema = new Schema(
         image: {
             secure_url: { type: String, required: true },
             public_id: { type: String, required: true }
-          },
+        },
+        tripDate: {
+            type: Date,
+            required: true,
+        },
     },
     {
         timestamps: true,

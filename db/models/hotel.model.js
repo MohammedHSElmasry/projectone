@@ -23,6 +23,14 @@ const hotelschema = new Schema(
       secure_url: { type: String, required: true },
       public_id: { type: String, required: true }
     },
+    bookingStartDate: {
+      type: Date,
+      required: true,
+    },
+    bookingEndDate: {
+      type: Date,
+      required: true,
+    },
   },
   {
     timestamps: true,

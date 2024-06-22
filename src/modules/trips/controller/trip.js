@@ -9,7 +9,7 @@ export const trips = asyncHandler(async (req, res, next) => {
 });
 
 export const createtrip = asyncHandler(async (req, res, next) => {
-  const { tripname, cityname, price, duration } = req.body;
+  const { tripname, cityname, price, duration, tripDate } = req.body;
   const city = await citymodel.findOne({ cityname });
   const tripcheck = await tripmodel.findOne({ tripname });
   if (tripcheck) {
@@ -19,31 +19,31 @@ export const createtrip = asyncHandler(async (req, res, next) => {
     return res.status(404).json({ message: "City not found" });
   }
 
-  if (!req.file) { return next(new Error("image is required ", { cause: 400 })) }
+  if (!req.file) {
+    return next(new Error("image is required ", { cause: 400 }));
+  }
   const { secure_url, public_id } = await cloudinary.uploader.upload(
     req.file.path,
     {
-      folder: `project/trip`
+      folder: `project/trip`,
     }
-  )
+  );
   const trip = await tripmodel.create({
     tripname,
     cityname: city.cityname,
     price,
     duration,
-    image: { secure_url, public_id }
+    tripDate,
+    image: { secure_url, public_id },
   });
 
   return res.json({ message: " done", trip });
 });
 
-
-
-
 export const updatetrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { tripname, cityname, price, duration } = req.body;
-  const city = await citymodel.findOne({ cityname })
+  const city = await citymodel.findOne({ cityname });
   if (!city) {
     return next(new Error("City not found", { cause: 404 }));
   }
@@ -52,15 +52,13 @@ export const updatetrip = asyncHandler(async (req, res, next) => {
   if (!trip) {
     return next(new Error("trip not found", { cause: 404 }));
   }
-  trip.tripname = tripname
-  trip.cityname = city.cityname
-  trip.price = price
-  trip.duration = duration
+  trip.tripname = tripname;
+  trip.cityname = city.cityname;
+  trip.price = price;
+  trip.duration = duration;
   await trip.save();
   return res.json({ message: "trip updated successfully", trip });
-}
-);
-
+});
 
 export const deletedtrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
@@ -69,9 +67,7 @@ export const deletedtrip = asyncHandler(async (req, res, next) => {
     return res.status(404).json({ message: "trip not found" });
   }
   return res.json({ message: "trip deleted successfully", deletedtrip });
-}
-);
-
+});
 
 export const tripbecity = asyncHandler(async (req, res, next) => {
   const { cityid } = req.params;
