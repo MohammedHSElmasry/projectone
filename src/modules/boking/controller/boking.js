@@ -4,8 +4,10 @@ import { userModel } from "../../../../db/models/user.model.js";
 import { tripmodel } from "../../../../db/models/trip.model.js";
 import { hotelmodel } from "../../../../db/models/hotel.model.js";
 import { programmodel } from "../../../../db/models/program.js";
+
 export const addBooking = asyncHandler(async (req, res, next) => {
   const { userid, id } = req.params;
+  const { startDate, endDate } = req.body;
   const user = await userModel.findById(userid);
   let tripBooked = null;
   let hotelBooked = null;
@@ -33,6 +35,8 @@ export const addBooking = asyncHandler(async (req, res, next) => {
     username: user.username,
     email: user.email,
     userid,
+    startDate,
+    endDate,
     userApplied: {
       trip: tripBooked,
       hotel: hotelBooked,
