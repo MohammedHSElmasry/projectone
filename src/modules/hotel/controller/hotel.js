@@ -14,8 +14,6 @@ export const createHotel = asyncHandler(async (req, res, next) => {
     cityname,
     singleRoomprice,
     doubleRoomprice,
-    bookingStartDate,
-    bookingEndDate,
   } = req.body;
   const city = await citymodel.findOne({ cityname });
   const hotelcheck = await hotelmodel.findOne({ name });
@@ -41,8 +39,6 @@ export const createHotel = asyncHandler(async (req, res, next) => {
     cityname: city.cityname,
     singleRoomprice,
     doubleRoomprice,
-    bookingStartDate,
-    bookingEndDate,
     image: { secure_url, public_id },
   });
 
