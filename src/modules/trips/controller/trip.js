@@ -9,7 +9,7 @@ export const trips = asyncHandler(async (req, res, next) => {
 });
 
 export const createtrip = asyncHandler(async (req, res, next) => {
-  const { tripname, cityname, price, duration, tripDate } = req.body;
+  const { tripname, cityname, price, duration } = req.body;
   const city = await citymodel.findOne({ cityname });
   const tripcheck = await tripmodel.findOne({ tripname });
   if (tripcheck) {
@@ -33,7 +33,6 @@ export const createtrip = asyncHandler(async (req, res, next) => {
     cityname: city.cityname,
     price,
     duration,
-    tripDate,
     image: { secure_url, public_id },
   });
 
